@@ -44,7 +44,7 @@ export const signInValidation = async (req, res, next) => {
   const userData = await db.query(`SELECT * FROM users WHERE email = $1;`, [
     email,
   ]);
-  console.log(userData.rows[0]);
+  // console.log(userData.rows[0]); mostra os dados do usuário logado
 
   if (
     userData.rowCount &&
