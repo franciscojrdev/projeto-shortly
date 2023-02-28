@@ -13,7 +13,7 @@ export const listUsers = async (req, res) => {
         JOIN "sessionsUrls" su
 	        ON s.id = su."sessionId"
         JOIN urls ur
-	    ON ur.id = su."urlsId"
+	        ON ur.id = su."urlsId"
         WHERE s.id = $1
         GROUP BY u.id;
         `,
