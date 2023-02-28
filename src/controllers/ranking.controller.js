@@ -12,7 +12,7 @@ export const listRankingUsers = async (req, res) => {
     JOIN urls ur
         ON ur.id = su."urlsId"
     GROUP BY su."sessionId",u.id,u.name
-    ORDER BY "linksCount" DESC
+    ORDER BY "visitCount" DESC
     LIMIT 10;
         `);
     res.status(200).send(findAllData);
