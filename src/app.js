@@ -15,6 +15,8 @@ server.use(express.json());
 
 server.use([authRouter, urlsRouter,userRouter,rankingRouter])
 
-server.listen(process.env.PORT, () => {
-  console.log(`Server running in port ${process.env.PORT}`);
+const port = process.env.PORT || 5000;
+
+server.listen(port, () => {
+  console.log(`Server running in port ${port}`);
 });

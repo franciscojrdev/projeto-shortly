@@ -7,16 +7,15 @@ export const createShortenUrl = async (req, res) => {
   try {
     const shortUrl = nanoid(10);
 
-    await db.query(`INSERT INTO urls("shortUrl",url) VALUES ($1,$2);`, [
-      shortUrl,
-      url,
-    ]);
-
     const { rows: findShortId } = await db.query(
-      `SELECT id,"shortUrl" FROM urls WHERE "shortUrl" = $1;`,
-      [shortUrl]
+      `INSERT INTO urls("shortUrl",url) VALUES ($1,$2) RETURNING id,"shortUrl";`,
+      [shortUrl, url]
     );
-
+    // console.log(findShortId);
+    // // const { rows: findShortId } = await db.query(
+    // //   `SELECT id,"shortUrl" FROM urls WHERE "shortUrl" = $1;`,
+    // //   [shortUrl]
+    // // );
     await db.query(
       `INSERT INTO "sessionsUrls"("sessionId","urlsId") VALUES ($1,$2);`,
       [id, findShortId[0].id]
