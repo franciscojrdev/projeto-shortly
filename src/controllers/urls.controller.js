@@ -11,11 +11,7 @@ export const createShortenUrl = async (req, res) => {
       `INSERT INTO urls("shortUrl",url) VALUES ($1,$2) RETURNING id,"shortUrl";`,
       [shortUrl, url]
     );
-    // console.log(findShortId);
-    // // const { rows: findShortId } = await db.query(
-    // //   `SELECT id,"shortUrl" FROM urls WHERE "shortUrl" = $1;`,
-    // //   [shortUrl]
-    // // );
+
     await db.query(
       `INSERT INTO "sessionsUrls"("sessionId","urlsId") VALUES ($1,$2);`,
       [id, findShortId[0].id]
@@ -55,7 +51,7 @@ export const openShortenUrl = async (req, res) => {
       `SELECT * FROM urls WHERE "shortUrl" = $1;`,
       [shortUrl]
     );
-    // console.log(findUrl.rows[0]);
+  
     if (findUrl.rowCount === 0) {
       return res.sendStatus(404);
     }
